@@ -10,6 +10,12 @@ const config: Config = {
     fontFamily: {
       'DM Sans': ['DM Sans', 'sans-serif'],
     },
+    screens: {
+      sm: '420px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
