@@ -35,44 +35,46 @@ export default function Header() {
                     </Link>
                 </div>
             </div>
-            <div className="flex items-center justify-center gap-8">
-                <AiOutlineUser />
-                <AiOutlineShoppingCart />
-            </div>
-            <div onClick={handleMenu} className="md:hidden">
-                <AiOutlineMenu size={25} />
-            </div>
+            <div>
+                <div className="flex items-center justify-center gap-8">
+                    <AiOutlineUser />
+                    <AiOutlineShoppingCart />
+                    <div onClick={handleMenu} className="md:hidden">
+                        <AiOutlineMenu size={25} />
+                    </div>
+                </div>
 
-            <div className={menu ? 'md:hidden fixed right-0 top-0 w-full h-screen bg-white' : ''}>
-                <div className={
-                    menu ? 'fixed right-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-slate-100 p-10 ease-in duration-500'
-                        : 'fixed right-[-100%] top-0 p-10 ease-in duration-500'
-                }>
-                    <div>
-                        <div className='flex w-full items-center justify-between'>
-                            <h2>LOGO</h2>
-                            <div onClick={handleMenu} className='rounded-full border border-black cursor-pointer'>
-                                <AiOutlineClose />
+                <div className={menu ? 'md:hidden fixed right-0 top-0 w-full h-screen bg-white' : ''}>
+                    <div className={
+                        menu ? 'fixed right-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-slate-100 p-10 ease-in duration-500'
+                            : 'fixed right-[-100%] top-0 p-10 ease-in duration-500'
+                    }>
+                        <div>
+                            <div className='flex w-full items-center justify-between'>
+                                <h2>LOGO</h2>
+                                <div onClick={handleMenu} className='rounded-full border border-black cursor-pointer'>
+                                    <AiOutlineClose />
+                                </div>
                             </div>
-                        </div>
-                        <div className='py-4 flex flex-col'>
-                            <ul>
-                                <Link href='#' scroll={false}>
-                                    <li className='py-4 text-sm text-slate-500 font-bold'>Home</li>
-                                </Link>
-                                <Link href='#' scroll={false}>
-                                    <li className='py-4 text-sm text-slate-500 font-bold'>Discover</li>
-                                </Link>
-                                <Link href='#' scroll={false}>
-                                    <li className='py-4 text-sm text-slate-500 font-bold'>Blog</li>
-                                </Link>
-                                <Link href='#' scroll={false}>
-                                    <li className='py-4 text-sm text-slate-500 font-bold'>About Us</li>
-                                </Link>
-                                <Link href='#' scroll={false}>
-                                    <li className='py-4 text-sm text-slate-500 font-bold'>Contact</li>
-                                </Link>
-                            </ul>
+                            <div className='py-4 flex flex-col'>
+                                <ul>
+                                    <Link href='#' scroll={false}>
+                                        <li className='py-4 text-sm text-slate-500 font-bold'>Home</li>
+                                    </Link>
+                                    <Link href='#' scroll={false}>
+                                        <li className='py-4 text-sm text-slate-500 font-bold'>Discover</li>
+                                    </Link>
+                                    <Link href='#' scroll={false}>
+                                        <li className='py-4 text-sm text-slate-500 font-bold'>Blog</li>
+                                    </Link>
+                                    <Link href='#' scroll={false}>
+                                        <li className='py-4 text-sm text-slate-500 font-bold'>About Us</li>
+                                    </Link>
+                                    <Link href='#' scroll={false}>
+                                        <li className='py-4 text-sm text-slate-500 font-bold'>Contact</li>
+                                    </Link>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
