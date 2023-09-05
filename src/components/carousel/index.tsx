@@ -1,18 +1,22 @@
 'use client'
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Advertising from '../advertising';
 
-export default function CustomCarousel() {
+type CustomCarouselProps = {
+    children: React.ReactElement[]
+}
+
+export default function CustomCarousel({ children }: CustomCarouselProps) {
     return (
         <div className='w-full'>
             <Carousel
                 showThumbs={false}
                 showStatus={false}
+                showArrows={false}
             >
-                <Advertising />
-                <Advertising />
-                <Advertising />
+                {children.map(child => {
+                    return child
+                })}
             </Carousel>
         </div>
     )

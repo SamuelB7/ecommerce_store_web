@@ -2,7 +2,7 @@
 
 export default function HighlightedProductCard() {
     return (
-        <div className="w-[350px] h-[450px] rounded-3xl border-2 border-slate-100 bg-white">
+        <div className="max-sm:w-full w-[350px] h-[450px] rounded-3xl border-2 border-slate-100 bg-white">
             <img src="https://placehold.co/500x300" alt="product_img" className="w-full rounded-t-3xl" />
             <div className="flex flex-col items-start py-5 px-7 gap-5 mt-4">
                 <div className="flex items-start justify-center gap-6">

@@ -11,7 +11,11 @@ export default function Home() {
     <main>
       <Header />
       <Hero />
-      <CustomCarousel />
+      <CustomCarousel>
+        <Advertising />
+        <Advertising />
+        <Advertising />
+      </CustomCarousel>
       <Highlights />
       <Categories />
       <Footer />

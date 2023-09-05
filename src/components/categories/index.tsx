@@ -12,7 +12,7 @@ export default function Categories() {
         <Container>
             <div className="flex flex-col justify-center items-center gap-5 py-4">
                 <h1 className="text-3xl font-bold">Search by category</h1>
-                <div className="flex justify-center items-center gap-8">
+                <div className="max-sm:grid max-sm:grid-cols-3 max-sm:grid-rows-2 flex justify-center items-center gap-8">
                     <div className="flex flex-col gap-3 items-center justify-center">
                         <div className="border-2 border-slate-900 rounded-full p-5">
                             <Link href={"#"}>
