@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import Container from "../container";
+import SearchBar from "../searchBar";
 
 export default function Header() {
     const [menu, setMenu] = useState(false)
@@ -35,6 +36,7 @@ export default function Header() {
                         <Link href="#" className="text-center text-slate-500 text-sm font-bold">
                             Contact
                         </Link>
+                        <SearchBar />
                     </div>
                 </div>
                 <div>
