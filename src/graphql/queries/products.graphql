@@ -4,5 +4,9 @@ query FindAllProducts($limit: Int, $offset: Int, $search: SearchProductParameter
     name
     price
     category
+    photos {
+      id
+      url
+    }
   }
 }

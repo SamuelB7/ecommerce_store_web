@@ -1,7 +1,8 @@
 import * as Types from './graphql';
 
 import gql from 'graphql-tag';
-import { NextRouter, useRouter } from 'next/router'
+import { NextRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { QueryHookOptions, useQuery } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 import type React from 'react';
@@ -13,34 +14,38 @@ export const FindAllProductsDocument = gql`
     name
     price
     category
+    photos {
+      id
+      url
+    }
   }
 }
     `;
 export async function getServerPageFindAllProducts
-    (options: Omit<Apollo.QueryOptions<Types.FindAllProductsQueryVariables>, 'query'>, ctx?: any ){
-        const apolloClient = getApolloClient(ctx);
-        
-        const data = await apolloClient.query<Types.FindAllProductsQuery>({ ...options, query: FindAllProductsDocument });
-        
-        const apolloState = apolloClient.cache.extract();
+  (options: Omit<Apollo.QueryOptions<Types.FindAllProductsQueryVariables>, 'query'>, ctx?: any) {
+  const apolloClient = getApolloClient(ctx);
 
-        return {
-            props: {
-                apolloState: apolloState,
-                data: data?.data,
-                error: data?.error ?? data?.errors ?? null,
-            },
-        };
-      }
+  const data = await apolloClient.query<Types.FindAllProductsQuery>({ ...options, query: FindAllProductsDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
 export const useFindAllProducts = (
-  optionsFunc?: (router: NextRouter)=> QueryHookOptions<Types.FindAllProductsQuery, Types.FindAllProductsQueryVariables>) => {
+  optionsFunc?: (router: NextRouter) => QueryHookOptions<Types.FindAllProductsQuery, Types.FindAllProductsQueryVariables>) => {
   const router = useRouter();
   const options = optionsFunc ? optionsFunc(router) : {};
   return useQuery(FindAllProductsDocument, options);
 };
-export type PageFindAllProductsComp = React.FC<{data?: Types.FindAllProductsQuery, error?: Apollo.ApolloError}>;
+export type PageFindAllProductsComp = React.FC<{ data?: Types.FindAllProductsQuery, error?: Apollo.ApolloError }>;
 export const ssrFindAllProducts = {
-      getServerPage: getServerPageFindAllProducts,
-      
-      usePage: useFindAllProducts,
-    }
+  getServerPage: getServerPageFindAllProducts,
+
+  usePage: useFindAllProducts,
+}

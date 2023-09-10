@@ -155,8 +155,19 @@ export type Product = {
   id: Scalars['String']['output'];
   isAvailable: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
+  photos: Array<ProductPhoto>;
   price: Scalars['Float']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ProductPhoto = {
+  __typename?: 'ProductPhoto';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['String']['output'];
+  productId: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  url: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -280,7 +291,7 @@ export type FindAllProductsQueryVariables = Exact<{
 }>;
 
 
-export type FindAllProductsQuery = { __typename?: 'Query', findAllProducts: Array<{ __typename?: 'Product', id: string, name: string, price: number, category: string }> };
+export type FindAllProductsQuery = { __typename?: 'Query', findAllProducts: Array<{ __typename?: 'Product', id: string, name: string, price: number, category: string, photos: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> }> };
 
 
 export const FindAllProductsDocument = gql`
@@ -290,6 +301,10 @@ export const FindAllProductsDocument = gql`
     name
     price
     category
+    photos {
+      id
+      url
+    }
   }
 }
     `;

@@ -1,6 +1,5 @@
 import { ApolloClient, InMemoryCache, NormalizedCacheObject } from "@apollo/client";
 
-
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 function createApolloClient() {
@@ -19,3 +18,8 @@ export function getApolloClient(initialState = null) {
     apolloClient = apolloClient ?? apolloClientGlobal
     return apolloClient
 }
+
+export const client = new ApolloClient({
+    uri: "http://localhost:3333/graphql",
+    cache: new InMemoryCache()
+})

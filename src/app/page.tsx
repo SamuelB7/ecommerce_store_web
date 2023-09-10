@@ -9,7 +9,6 @@ import Highlights from '@/components/highlights'
 export default function Home() {
   return (
     <main>
-      <Header />
       <Hero />
       <CustomCarousel>
         <Advertising />
@@ -18,7 +17,6 @@ export default function Home() {
       </CustomCarousel>
       <Highlights />
       <Categories />
-      <Footer />
     </main>
   )
 }
