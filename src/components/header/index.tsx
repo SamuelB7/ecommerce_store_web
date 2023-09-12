@@ -24,8 +24,8 @@ export default function Header() {
                         <Link href="#" className="text-center text-slate-500 text-sm font-bold">
                             Home
                         </Link>
-                        <Link href="#" className="text-center text-slate-500 text-sm font-bold">
-                            Discover
+                        <Link href="/products" className="text-center text-slate-500 text-sm font-bold">
+                            Products
                         </Link>
                         <Link href="#" className="text-center text-slate-500 text-sm font-bold">
                             Blog
@@ -65,8 +65,8 @@ export default function Header() {
                                         <Link href='#' scroll={false}>
                                             <li className='py-4 text-sm text-slate-500 font-bold'>Home</li>
                                         </Link>
-                                        <Link href='#' scroll={false}>
-                                            <li className='py-4 text-sm text-slate-500 font-bold'>Discover</li>
+                                        <Link href='/products' scroll={false}>
+                                            <li className='py-4 text-sm text-slate-500 font-bold'>Products</li>
                                         </Link>
                                         <Link href='#' scroll={false}>
                                             <li className='py-4 text-sm text-slate-500 font-bold'>Blog</li>
