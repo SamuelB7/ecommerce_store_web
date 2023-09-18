@@ -14,6 +14,7 @@ export const FindAllProductsDocument = gql`
     name
     price
     category
+    averageRating
     photos {
       id
       url

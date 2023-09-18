@@ -26,6 +26,7 @@ export default async function Products() {
                             name={product.name}
                             price={product.price}
                             photo={product.photos[0].url}
+                            rating={product.averageRating}
                         />
                     )
                 })}

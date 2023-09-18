@@ -148,6 +148,7 @@ export type OrderProductInput = {
 
 export type Product = {
   __typename?: 'Product';
+  averageRating?: Maybe<Scalars['Float']['output']>;
   category: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -157,6 +158,7 @@ export type Product = {
   name: Scalars['String']['output'];
   photos: Array<ProductPhoto>;
   price: Scalars['Float']['output'];
+  rating: Array<ProductRating>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -168,6 +170,17 @@ export type ProductPhoto = {
   productId: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   url: Scalars['String']['output'];
+};
+
+export type ProductRating = {
+  __typename?: 'ProductRating';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  productId: Scalars['String']['output'];
+  rating: Scalars['Float']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type Query = {
@@ -291,7 +304,7 @@ export type FindAllProductsQueryVariables = Exact<{
 }>;
 
 
-export type FindAllProductsQuery = { __typename?: 'Query', findAllProducts: Array<{ __typename?: 'Product', id: string, name: string, price: number, category: string, photos: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> }> };
+export type FindAllProductsQuery = { __typename?: 'Query', findAllProducts: Array<{ __typename?: 'Product', id: string, name: string, price: number, category: string, averageRating?: number | null, photos: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> }> };
 
 
 export const FindAllProductsDocument = gql`
@@ -301,6 +314,7 @@ export const FindAllProductsDocument = gql`
     name
     price
     category
+    averageRating
     photos {
       id
       url
