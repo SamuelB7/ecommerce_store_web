@@ -156,9 +156,9 @@ export type Product = {
   id: Scalars['String']['output'];
   isAvailable: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
-  photos: Array<ProductPhoto>;
+  photos?: Maybe<Array<ProductPhoto>>;
   price: Scalars['Float']['output'];
-  rating: Array<ProductRating>;
+  rating?: Maybe<Array<ProductRating>>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -304,7 +304,14 @@ export type FindAllProductsQueryVariables = Exact<{
 }>;
 
 
-export type FindAllProductsQuery = { __typename?: 'Query', findAllProducts: Array<{ __typename?: 'Product', id: string, name: string, price: number, category: string, averageRating?: number | null, photos: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> }> };
+export type FindAllProductsQuery = { __typename?: 'Query', findAllProducts: Array<{ __typename?: 'Product', id: string, name: string, price: number, category: string, averageRating?: number | null, photos?: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> | null }> };
+
+export type FindOneProductQueryVariables = Exact<{
+  findOneProductId: Scalars['String']['input'];
+}>;
+
+
+export type FindOneProductQuery = { __typename?: 'Query', findOneProduct: { __typename?: 'Product', id: string, name: string, price: number, description: string, isAvailable: boolean, averageRating?: number | null, rating?: Array<{ __typename?: 'ProductRating', id: string, description?: string | null }> | null, photos?: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> | null } };
 
 
 export const FindAllProductsDocument = gql`
@@ -352,3 +359,51 @@ export function useFindAllProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type FindAllProductsQueryHookResult = ReturnType<typeof useFindAllProductsQuery>;
 export type FindAllProductsLazyQueryHookResult = ReturnType<typeof useFindAllProductsLazyQuery>;
 export type FindAllProductsQueryResult = Apollo.QueryResult<FindAllProductsQuery, FindAllProductsQueryVariables>;
+export const FindOneProductDocument = gql`
+    query FindOneProduct($findOneProductId: String!) {
+  findOneProduct(id: $findOneProductId) {
+    id
+    name
+    price
+    description
+    isAvailable
+    averageRating
+    rating {
+      id
+      description
+    }
+    photos {
+      id
+      url
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindOneProductQuery__
+ *
+ * To run a query within a React component, call `useFindOneProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindOneProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindOneProductQuery({
+ *   variables: {
+ *      findOneProductId: // value for 'findOneProductId'
+ *   },
+ * });
+ */
+export function useFindOneProductQuery(baseOptions: Apollo.QueryHookOptions<FindOneProductQuery, FindOneProductQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindOneProductQuery, FindOneProductQueryVariables>(FindOneProductDocument, options);
+      }
+export function useFindOneProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindOneProductQuery, FindOneProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindOneProductQuery, FindOneProductQueryVariables>(FindOneProductDocument, options);
+        }
+export type FindOneProductQueryHookResult = ReturnType<typeof useFindOneProductQuery>;
+export type FindOneProductLazyQueryHookResult = ReturnType<typeof useFindOneProductLazyQuery>;
+export type FindOneProductQueryResult = Apollo.QueryResult<FindOneProductQuery, FindOneProductQueryVariables>;

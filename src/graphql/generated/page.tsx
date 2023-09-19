@@ -1,8 +1,7 @@
 import * as Types from './graphql';
 
 import gql from 'graphql-tag';
-import { NextRouter } from 'next/router'
-import { useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { QueryHookOptions, useQuery } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 import type React from 'react';
@@ -39,7 +38,7 @@ export async function getServerPageFindAllProducts
   };
 }
 export const useFindAllProducts = (
-  optionsFunc?: (router: NextRouter) => QueryHookOptions<Types.FindAllProductsQuery, Types.FindAllProductsQueryVariables>) => {
+  optionsFunc?: (router: any) => QueryHookOptions<Types.FindAllProductsQuery, Types.FindAllProductsQueryVariables>) => {
   const router = useRouter();
   const options = optionsFunc ? optionsFunc(router) : {};
   return useQuery(FindAllProductsDocument, options);
@@ -49,4 +48,52 @@ export const ssrFindAllProducts = {
   getServerPage: getServerPageFindAllProducts,
 
   usePage: useFindAllProducts,
+}
+export const FindOneProductDocument = gql`
+    query FindOneProduct($findOneProductId: String!) {
+  findOneProduct(id: $findOneProductId) {
+    id
+    name
+    price
+    description
+    isAvailable
+    averageRating
+    rating {
+      id
+      description
+    }
+    photos {
+      id
+      url
+    }
+  }
+}
+    `;
+export async function getServerPageFindOneProduct
+  (options: Omit<Apollo.QueryOptions<Types.FindOneProductQueryVariables>, 'query'>, ctx?: any) {
+  const apolloClient = getApolloClient(ctx);
+
+  const data = await apolloClient.query<Types.FindOneProductQuery>({ ...options, query: FindOneProductDocument });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export const useFindOneProduct = (
+  optionsFunc?: (router: any) => QueryHookOptions<Types.FindOneProductQuery, Types.FindOneProductQueryVariables>) => {
+  const router = useRouter();
+  const options = optionsFunc ? optionsFunc(router) : {};
+  return useQuery(FindOneProductDocument, options);
+};
+export type PageFindOneProductComp = React.FC<{ data?: Types.FindOneProductQuery, error?: Apollo.ApolloError }>;
+export const ssrFindOneProduct = {
+  getServerPage: getServerPageFindOneProduct,
+
+  usePage: useFindOneProduct,
 }

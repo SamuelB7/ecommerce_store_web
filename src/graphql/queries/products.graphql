@@ -11,3 +11,22 @@ query FindAllProducts($limit: Int, $offset: Int, $search: SearchProductParameter
     }
   }
 }
+
+query FindOneProduct($findOneProductId: String!) {
+  findOneProduct(id: $findOneProductId) {
+    id
+    name
+    price
+    description
+    isAvailable
+    averageRating
+    rating {
+      id
+      description
+    }
+    photos {
+      id
+      url
+    }
+  }
+}
