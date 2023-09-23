@@ -1,7 +1,8 @@
 import * as Types from './graphql';
 
 import gql from 'graphql-tag';
-import { useSearchParams, useRouter } from 'next/navigation'
+import { NextRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { QueryHookOptions, useQuery } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 import type React from 'react';
@@ -38,7 +39,7 @@ export async function getServerPageFindAllProducts
   };
 }
 export const useFindAllProducts = (
-  optionsFunc?: (router: any) => QueryHookOptions<Types.FindAllProductsQuery, Types.FindAllProductsQueryVariables>) => {
+  optionsFunc?: (router: NextRouter) => QueryHookOptions<Types.FindAllProductsQuery, Types.FindAllProductsQueryVariables>) => {
   const router = useRouter();
   const options = optionsFunc ? optionsFunc(router) : {};
   return useQuery(FindAllProductsDocument, options);
@@ -58,6 +59,7 @@ export const FindOneProductDocument = gql`
     description
     isAvailable
     averageRating
+    category
     rating {
       id
       description
@@ -86,7 +88,7 @@ export async function getServerPageFindOneProduct
   };
 }
 export const useFindOneProduct = (
-  optionsFunc?: (router: any) => QueryHookOptions<Types.FindOneProductQuery, Types.FindOneProductQueryVariables>) => {
+  optionsFunc?: (router: NextRouter) => QueryHookOptions<Types.FindOneProductQuery, Types.FindOneProductQueryVariables>) => {
   const router = useRouter();
   const options = optionsFunc ? optionsFunc(router) : {};
   return useQuery(FindOneProductDocument, options);

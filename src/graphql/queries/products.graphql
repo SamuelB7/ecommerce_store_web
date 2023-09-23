@@ -20,6 +20,7 @@ query FindOneProduct($findOneProductId: String!) {
     description
     isAvailable
     averageRating
+    category
     rating {
       id
       description

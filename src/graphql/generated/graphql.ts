@@ -311,7 +311,7 @@ export type FindOneProductQueryVariables = Exact<{
 }>;
 
 
-export type FindOneProductQuery = { __typename?: 'Query', findOneProduct: { __typename?: 'Product', id: string, name: string, price: number, description: string, isAvailable: boolean, averageRating?: number | null, rating?: Array<{ __typename?: 'ProductRating', id: string, description?: string | null }> | null, photos?: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> | null } };
+export type FindOneProductQuery = { __typename?: 'Query', findOneProduct: { __typename?: 'Product', id: string, name: string, price: number, description: string, isAvailable: boolean, averageRating?: number | null, category: string, rating?: Array<{ __typename?: 'ProductRating', id: string, description?: string | null }> | null, photos?: Array<{ __typename?: 'ProductPhoto', id: string, url: string }> | null } };
 
 
 export const FindAllProductsDocument = gql`
@@ -368,6 +368,7 @@ export const FindOneProductDocument = gql`
     description
     isAvailable
     averageRating
+    category
     rating {
       id
       description
